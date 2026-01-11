@@ -1,7 +1,7 @@
 /* =========================
    GLOBAL RESET & SAFETY
 ========================= */
-* {
+ {
   box-sizing: border-box;
 }
 
@@ -252,4 +252,39 @@ html, body {
     width: 100px;
     height: 100px;
   }
+}
+.profile-info em {
+  font-size: 3rem;     /* BIGGER */
+  color: #000;
+  line-height: 3;
+  font-style: normal;
+}
+/* =========================
+   PROFILE TEXT COLORS & SIZE
+========================= */
+
+/* Fixed labels */
+.profile-info .label {
+  color: #c62828;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* User data */
+.profile-info .value {
+  color: #000;
+  font-size: 3rem;
+  line-height: 2.8;
+}
+
+/* Delete button (admin only) */
+.profile-delete {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  padding: 16px 26px;
+  font-size: 2.2rem;
+  border-radius: 12px;
+  margin-top: 18px;
+  cursor: pointer;
 }

@@ -23,61 +23,46 @@ let isAdmin = false;
  * LOGIN
  ***********************/
 function login() {
-  const inputPass = document.getElementById("adminPassword").value.trim();
-
-  if (!inputPass) {
-    alert("من فضلك أدخل كلمة المرور");
-    return;
-  }
+  const pass = document.getElementById("adminPassword").value.trim();
+  if (!pass) return alert("من فضلك أدخل كلمة المرور");
 
   db.ref("admin/password").once("value")
-    .then(snapshot => {
-      const realPassword = snapshot.val();
-
-      if (inputPass === realPassword) {
+    .then(snap => {
+      if (snap.val() === pass) {
         isAdmin = true;
 
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("adminPanel").style.display = "block";
         document.getElementById("welcomeMsg").style.display = "block";
 
+        // 🔥 IMPORTANT: re-render profiles so delete buttons appear
+        loadProfiles();
+
         alert("تم تسجيل الدخول بنجاح");
       } else {
         alert("كلمة المرور غير صحيحة");
       }
     })
-    .catch(() => {
-      alert("خطأ في الاتصال بقاعدة البيانات");
-    });
+    .catch(() => alert("خطأ في الاتصال بقاعدة البيانات"));
 }
 
 /***********************
- * CHANGE PASSWORD (ADMIN)
+ * CHANGE PASSWORD
  ***********************/
 function changePassword() {
-  if (!isAdmin) {
-    alert("يجب تسجيل الدخول كمسؤول");
-    return;
-  }
+  if (!isAdmin) return;
 
   const newPass = prompt("أدخل كلمة المرور الجديدة:");
-
-  if (!newPass || newPass.length < 4) {
-    alert("كلمة المرور يجب أن تكون 4 أحرف على الأقل");
-    return;
-  }
+  if (!newPass || newPass.length < 4)
+    return alert("كلمة المرور يجب أن تكون 4 أحرف على الأقل");
 
   db.ref("admin/password").set(newPass)
-    .then(() => {
-      alert("تم تغيير كلمة المرور بنجاح ✅");
-    })
-    .catch(() => {
-      alert("فشل تغيير كلمة المرور");
-    });
+    .then(() => alert("تم تغيير كلمة المرور بنجاح ✅"))
+    .catch(() => alert("فشل تغيير كلمة المرور"));
 }
 
 /***********************
- * ADD PROFILE (ADMIN)
+ * ADD PROFILE  ✅ FIXED
  ***********************/
 function addProfile() {
   if (!isAdmin) return;
@@ -104,34 +89,36 @@ function addProfile() {
   db.ref("profiles/" + gender).push(profile)
     .then(() => {
       clearForm();
+      alert("تمت الإضافة بنجاح ✅");
     })
-    .catch(() => {
-      alert("خطأ أثناء الحفظ");
-    });
+    .catch(() => alert("خطأ أثناء الحفظ"));
 }
 
 /***********************
- * DELETE PROFILE (ADMIN)
+ * DELETE PROFILE  ✅ WORKING
  ***********************/
 function deleteProfile(key, gender) {
   if (!isAdmin) return;
 
   if (!confirm("هل أنت متأكد من الحذف؟")) return;
 
-  db.ref("profiles/" + gender + "/" + key).remove();
+  db.ref(`profiles/${gender}/${key}`).remove();
 }
 
 /***********************
- * LOAD PROFILES (ALL USERS)
+ * LOAD PROFILES
  ***********************/
 function loadProfiles() {
-  db.ref("profiles/men").on("value", snap => {
-    renderProfiles(snap.val(), "men");
-  });
+  db.ref("profiles/men").off();
+  db.ref("profiles/women").off();
 
-  db.ref("profiles/women").on("value", snap => {
-    renderProfiles(snap.val(), "women");
-  });
+  db.ref("profiles/men").on("value", snap =>
+    renderProfiles(snap.val(), "men")
+  );
+
+  db.ref("profiles/women").on("value", snap =>
+    renderProfiles(snap.val(), "women")
+  );
 }
 
 /***********************
@@ -156,6 +143,7 @@ function renderProfiles(data, gender) {
 
 function profileHTML(p, gender, index, key) {
   const avatar = gender === "men" ? "img/man.webp" : "img/woman.avif";
+
   const delBtn = isAdmin
     ? `<button class="profile-delete" onclick="deleteProfile('${key}','${gender}')">حذف</button>`
     : "";
@@ -164,14 +152,30 @@ function profileHTML(p, gender, index, key) {
     <div class="profile">
       <img src="${avatar}">
       <div class="profile-info">
-        <strong>${index}. ${p.name}</strong><br>
-        العمر: ${p.age}<br>
-        الطول: ${p.height || "-"}<br>
-        لون الشعر: ${p.hair || "-"}<br>
-        لون العيون: ${p.eyes || "-"}<br>
-        الوظيفة: ${p.job || "-"}<br>
-        <em>عن الشخص:</em> ${p.describeMe || "-"}<br>
-        <em>المطلوب:</em> ${p.requirements || "-"}
+
+        <strong>${index}. ${p.name}</strong>
+
+        <span class="label">العمر:</span>
+        <span class="value">${p.age}</span><br>
+
+        <span class="label">الطول:</span>
+        <span class="value">${p.height || "-"}</span><br>
+
+        <span class="label">لون الشعر:</span>
+        <span class="value">${p.hair || "-"}</span><br>
+
+        <span class="label">لون العيون:</span>
+        <span class="value">${p.eyes || "-"}</span><br>
+
+        <span class="label">الوظيفة:</span>
+        <span class="value">${p.job || "-"}</span><br>
+
+        <span class="label">عن الشخص:</span>
+        <span class="value">${p.describeMe || "-"}</span><br>
+
+        <span class="label">المطلوب:</span>
+        <span class="value">${p.requirements || "-"}</span>
+
       </div>
       ${delBtn}
     </div>
