@@ -288,3 +288,37 @@ html, body {
   margin-top: 18px;
   cursor: pointer;
 }
+/* =========================
+   ADMIN LOGIN & PANEL BIGGER
+========================= */
+
+/* Make the entire form-card bigger */
+#loginBox, #adminPanel {
+  padding: 40px !important;         /* double padding */
+  font-size: 3rem;                  /* double base font size */
+}
+
+/* Titles (h2, h3) */
+#loginBox h3,
+#adminPanel h2 {
+  font-size: 6rem !important;       /* double title size */
+  margin-bottom: 30px;
+}
+
+/* Inputs, select, textarea */
+#loginBox input,
+#adminPanel input,
+#adminPanel select,
+#adminPanel textarea {
+  font-size: 3rem !important;       /* double input text */
+  padding: 30px !important;         /* bigger input boxes */
+  border-radius: 14px !important;
+}
+
+/* Buttons */
+#loginBox button,
+#adminPanel button {
+  font-size: 3rem !important;       /* double button text */
+  padding: 24px !important;
+  border-radius: 14px !important;
+}
