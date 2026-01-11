@@ -173,8 +173,8 @@ html, body {
 }
 
 .profile {
-  width: 100%;
-  padding: 20px;
+  width: 90%;
+  padding:60px;
   margin-bottom: 20px;
   background: #fafafa;
   border-radius: 12px;
@@ -289,20 +289,29 @@ html, body {
   cursor: pointer;
 }
 /* =========================
-   ADMIN LOGIN & PANEL BIGGER
+   ADMIN LOGIN & PANEL CENTERED 80% OF PAGE
 ========================= */
 
-/* Make the entire form-card bigger */
+/* Use viewport width to ignore parent padding */
 #loginBox, #adminPanel {
-  padding: 40px !important;         /* double padding */
-  font-size: 3rem;                  /* double base font size */
+  width: 80vw;              /* 80% of the viewport width */
+  max-width: 1000px;        /* optional: prevent too wide on very large screens */
+  margin: 20px auto;        /* center horizontally */
+  padding: 40px;            /* inner padding */
+  font-size: 3rem;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #ccc;
 }
 
 /* Titles (h2, h3) */
 #loginBox h3,
 #adminPanel h2 {
-  font-size: 6rem !important;       /* double title size */
+  font-size: 6rem;
   margin-bottom: 30px;
+  color: #c62828;
 }
 
 /* Inputs, select, textarea */
@@ -310,15 +319,40 @@ html, body {
 #adminPanel input,
 #adminPanel select,
 #adminPanel textarea {
-  font-size: 3rem !important;       /* double input text */
-  padding: 30px !important;         /* bigger input boxes */
-  border-radius: 14px !important;
+  width: 100%;             /* full width of box */
+  height: 70px;            /* fixed height */
+  font-size: 3rem;         /* text size */
+  padding: 0 20px;         /* horizontal padding only */
+  margin-bottom: 20px;
+  border-radius: 14px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  color: #000;
+  display: block;
+}
+
+/* Placeholder text */
+#loginBox input::placeholder,
+#adminPanel input::placeholder,
+#adminPanel textarea::placeholder {
+  color: #c62828;
+  font-weight: 700;
+  font-size: 3rem;
 }
 
 /* Buttons */
 #loginBox button,
 #adminPanel button {
-  font-size: 3rem !important;       /* double button text */
-  padding: 24px !important;
-  border-radius: 14px !important;
+  width: 100%;             /* match input width */
+  height: 70px;            /* same as inputs */
+  font-size: 3rem;
+  padding: 0 20px;
+  border-radius: 14px;
+  border: none;
+  background: #c62828;
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 10px;
+  display: block;
 }
