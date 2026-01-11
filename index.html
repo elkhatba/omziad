@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ام زياد خاطبة بنها</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase v8 -->
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Your local Firebase config (ignored by GitHub) -->
+  <script src="firebase-config.js"></script>
+
+  <!-- Your main JS -->
+  <script src="script.js"></script>
+
+
+</head>
+
+<body>
+
+<!-- PAGE FRAME -->
+<div class="page-frame">
+
+  <h1 class="site-title">
+    ام زياد
+    <span>خاطبة بنها</span>
+  </h1>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/201062534821" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <!-- ADMIN LOGIN -->
+  <div id="loginBox" class="form-card">
+    <h3>دخول المشرف</h3>
+    <input type="password" id="adminPassword" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <!-- WELCOME MESSAGE -->
+  <div id="welcomeMsg" class="form-card" style="display:none;">
+    <h3>مرحباً بالمشرف!</h3>
+    <p>لقد تم تسجيل دخولك بنجاح.</p>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="form-card" style="display:none;">
+    <h2>إضافة ملف جديد</h2>
+
+    <select id="gender">
+      <option value="men">رجل</option>
+      <option value="women">امرأة</option>
+    </select>
+
+    <input id="name" placeholder="الاسم">
+    <input id="age" placeholder="العمر">
+    <input id="height" placeholder="الطول">
+    <input id="hair" placeholder="لون الشعر">
+    <input id="eyes" placeholder="لون العيون">
+    <input id="job" placeholder="الوظيفة">
+
+    <textarea id="describeMe" placeholder="صف نفسك"></textarea>
+    <textarea id="requirements" placeholder="صف شريك الحياة المطلوب"></textarea>
+
+    <button onclick="addProfile()">إضافة</button>
+    <button onclick="changePassword()" style="margin-top:10px; background:#ff9800;">
+      تغيير كلمة المرور
+    </button>
+  </div>
+
+  <!-- INTRODUCTION SECTION -->
+  <section class="intro-section">
+    <div class="intro-text-highlight">
+      <p>
+        أم زياد تقدم خدمة <strong>الزواج الحلال</strong> بأسلوب مميز وآمن.
+        مكتبها يقدم استشارات شخصية لكل العرسان، ويتابع كل التفاصيل بدقة
+        ليوصلهم للزواج الناجح والسعيد.
+      </p>
+      <p>
+        يمكنكم الاستفادة من خدماتها
+        <strong>مرة واحدة حتى يتم الزواج</strong> أو حسب الحاجة.
+        لديها العديد من قصص الزواج الناجح.
+      </p>
+      <p>
+        إذا أعجبك عريس أو عروس معينة، يمكنك التواصل مباشرة عبر
+        <strong>واتساب أو فيسبوك</strong>
+        للحصول على الصور والتفاصيل.
+      </p>
+    </div>
+
+    <div class="media-gallery">
+      <div class="media-frame">
+        <video controls>
+          <source src="videos/adv.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو
+        </video>
+        <p>ام زياد خاطبة بنها</p>
+      </div>
+
+      <div class="media-frame">
+        <img src="img/om.jpeg" alt="صورة أم زياد">
+        <p>ام زياد خاطبة بنها</p>
+      </div>
+
+      <div class="media-frame">
+        <video controls>
+          <source src="videos/success.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو
+        </video>
+        <p>ام زياد خاطبة بنها</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILES SECTION -->
+  <section class="profiles-section page-frame">
+
+    <!-- WOMEN PROFILES -->
+    <div class="profiles-column" id="womenList">
+      <h2>👩 النساء</h2>
+    </div>
+
+    <!-- MEN PROFILES -->
+    <div class="profiles-column" id="menList">
+      <h2>👨 الرجال</h2>
+    </div>
+
+  </section>
+
+</div>
+<!-- END PAGE FRAME -->
+
+</body>
+<footer style="text-align:center; margin:20px 0;">
+  <a href="privacy.html">سياسة الخصوصية</a>
+</footer>
+
+</html>
